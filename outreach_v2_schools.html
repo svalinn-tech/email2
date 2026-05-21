@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Предложение о сотрудничестве — WinWinBot</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8f9ff; color: #111; }
+
+.page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; background: linear-gradient(160deg, #eff6ff 0%, #f5f3ff 50%, #fdf2f8 100%); position: relative; overflow: hidden; }
+
+.orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; opacity: .45; }
+.orb1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(99,102,241,0.22), transparent 70%); top: -120px; right: -80px; }
+.orb2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(219,39,119,0.14), transparent 70%); bottom: -100px; left: -60px; }
+
+.card { background: #fff; border-radius: 28px; box-shadow: 0 24px 80px rgba(79,70,229,0.13); max-width: 580px; width: 100%; position: relative; z-index: 1; overflow: hidden; }
+.card-bar { height: 5px; background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777); }
+.card-body { padding: 44px 48px 40px; }
+
+.sender { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.sender-avatar { width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, #2563eb, #7c3aed); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: #fff; flex-shrink: 0; }
+.sender-name { font-size: 17px; font-weight: 800; color: #111; }
+.sender-role { font-size: 13px; color: #6b7280; font-weight: 600; margin-top: 2px; }
+.sender-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; color: #5b21b6; text-decoration: none; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.18); border-radius: 999px; padding: 3px 10px; margin-top: 6px; transition: all .2s; }
+.sender-link:hover { background: rgba(124,58,237,0.15); }
+
+.subject-badge { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(135deg, rgba(239,246,255,0.9), rgba(245,243,255,0.9)); border: 1px solid rgba(124,58,237,0.2); border-radius: 12px; padding: 10px 16px; font-size: 13px; font-weight: 700; color: #374151; margin-bottom: 24px; }
+.subject-dot { width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #7c3aed); flex-shrink: 0; }
+
+.greeting { font-size: 22px; font-weight: 900; color: #111; letter-spacing: -.02em; margin-bottom: 20px; line-height: 1.3; }
+
+.text-block { font-size: 15px; color: #374151; line-height: 1.75; margin-bottom: 16px; }
+.text-block strong { color: #111; font-weight: 800; }
+
+.highlight { background: linear-gradient(135deg, rgba(239,246,255,0.7), rgba(245,243,255,0.7)); border: 1px solid rgba(124,58,237,0.18); border-radius: 16px; padding: 20px 22px; margin: 24px 0; }
+.highlight-icon { font-size: 20px; margin-bottom: 8px; }
+.highlight-title { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 6px; }
+.highlight-text { font-size: 14px; color: #4b5563; line-height: 1.65; }
+
+.divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(124,58,237,0.12), transparent); margin: 24px 0; }
+
+.cta-block { background: linear-gradient(135deg, #1e1b4b, #312e81, #4c1d95); border-radius: 20px; padding: 28px; margin-top: 28px; }
+.cta-question { font-size: 17px; font-weight: 800; color: #fff; line-height: 1.5; margin-bottom: 20px; }
+.cta-question span { background: linear-gradient(135deg, #a5b4fc, #f0abfc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.cta-btn { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: 14px; padding: 14px 18px; text-decoration: none; transition: all .2s; }
+.cta-btn:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.3); transform: translateX(4px); }
+.cta-btn-icon { font-size: 20px; flex-shrink: 0; }
+.cta-btn-title { font-size: 15px; font-weight: 800; color: #fff; }
+.cta-btn-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+.sig { display: flex; align-items: center; gap: 14px; margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(124,58,237,0.1); }
+.sig-avatar { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #2563eb, #7c3aed); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; color: #fff; flex-shrink: 0; }
+.sig-name { font-size: 15px; font-weight: 800; color: #111; }
+.sig-title { font-size: 12px; color: #6b7280; margin-top: 2px; }
+.sig-links { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.sig-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; color: #5b21b6; text-decoration: none; background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.18); border-radius: 999px; padding: 4px 12px; transition: all .2s; }
+.sig-link:hover { background: rgba(124,58,237,0.15); }
+
+@media(max-width: 600px) {
+  .card-body { padding: 28px 20px 24px; }
+  .greeting { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="page">
+  <div class="card">
+    <div class="card-bar"></div>
+    <div class="card-body">
+
+      <!-- SENDER -->
+      <div class="sender">
+        <div class="sender-avatar">Ю</div>
+        <div>
+          <div class="sender-name">Юрий</div>
+          <div class="sender-role">Руководитель партнёрской сети WinWinBot</div>
+          <a href="https://winwinbot.ru/" target="_blank" class="sender-link">🔗 winwinbot.ru</a>
+        </div>
+      </div>
+
+      <!-- SUBJECT -->
+      <div class="subject-badge">
+        <div class="subject-dot"></div>
+        Обмен опытом и сотрудничество
+      </div>
+
+      <!-- GREETING -->
+      <div class="greeting">Приветствую! 👋</div>
+
+      <!-- BLOCK 1: Представление + повод -->
+      <p class="text-block">
+        Меня зовут Юрий, я развиваю партнёрскую сеть <strong>WinWinBot</strong> — платформы для автоматизации продаж в мессенджерах. Недавно увидел ваше обучение по партнёрским программам — интересный формат.
+      </p>
+
+      <!-- BLOCK 2: Исследование -->
+      <p class="text-block">
+        Сейчас провожу небольшое исследование рынка и общаюсь с фаундерами образовательных проектов. Хочу <strong>сверить пару гипотез</strong> о том, как школы помогают выпускникам монетизировать навыки через партнёрские программы — и какие из них наиболее выгодны.
+      </p>
+
+      <!-- HIGHLIGHT -->
+      <div class="highlight">
+        <div class="highlight-icon">💡</div>
+        <div class="highlight-title">Почему это может быть интересно вашей школе:</div>
+        <div class="highlight-text">Партнёрка WinWinBot — один из реальных инструментов монетизации для технарей на клиентских проектах. Готов поделиться практикой и обсудить, как это может усилить вашу программу.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- CTA -->
+      <div class="cta-block">
+        <div class="cta-question">
+          С кем из команды возможно<br/>
+          <span>обменяться опытом и обсудить сотрудничество?</span>
+        </div>
+        <a href="https://t.me/partner_winwinbot" target="_blank" class="cta-btn">
+          <span class="cta-btn-icon">✈️</span>
+          <div>
+            <div class="cta-btn-title">Написать в Telegram</div>
+            <div class="cta-btn-sub">t.me/partner_winwinbot — отвечу быстро</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- SIGNATURE -->
+      <div class="sig">
+        <div class="sig-avatar">Ю</div>
+        <div>
+          <div class="sig-name">Юрий</div>
+          <div class="sig-title">Руководитель партнёрской сети WinWinBot</div>
+          <div class="sig-links">
+            <a href="https://winwinbot.ru/" target="_blank" class="sig-link">🌐 winwinbot.ru</a>
+            <a href="https://t.me/partner_winwinbot" target="_blank" class="sig-link">✈️ t.me/partner_winwinbot</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
